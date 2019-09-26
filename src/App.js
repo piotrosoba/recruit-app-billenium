@@ -1,12 +1,12 @@
 import React from 'react'
 
-// import FullScreenCircural from './components/FullScreenCircural'
+import FullScreenCircural from './components/FullScreenCircural'
 // import Snackbars from './components/Snackbars'
 
 const App = props => {
   return (
     <div>
-      {/* <FullScreenCircural /> */}
+      <FullScreenCircural />
       {/* <Snackbars /> */}
     </div>
   )
