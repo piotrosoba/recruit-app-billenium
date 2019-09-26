@@ -1,4 +1,4 @@
-export const DATABASE_URL = 'https://piotrosoba-billenium-recruit.firebaseio.com/'
+export const URL = 'https://piotrosoba-billenium-recruit.firebaseio.com/'
 const API_KEY = 'AIzaSyAwa2MqwYIP7-dqJzOMnMq_ZAe58waW-hY'
 
 export const REGISTER_URL = 'https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=' + API_KEY

@@ -3,10 +3,12 @@ import thunk from 'redux-thunk'
 
 import fullScreenCircural from './state/fullScreenCircural'
 import snackbars from './state/snackbars'
+import auth from './state/auth'
 
 const reducer = combineReducers({
   fullScreenCircural,
-  snackbars
+  snackbars,
+  auth
 })
 
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose
