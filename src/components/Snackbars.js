@@ -1,9 +1,10 @@
 import React from 'react'
+import PropTypes from 'prop-types'
+
 import { connect } from 'react-redux'
 
 import MuiSnackbar from '@material-ui/core/Snackbar'
 import { SnackbarContent } from '@material-ui/core';
-
 
 const Snackbars = props => {
   return (
@@ -26,6 +27,10 @@ const Snackbars = props => {
       ))}
     </div>
   )
+}
+
+Snackbars.propTypes = {
+  _snackbars: PropTypes.array
 }
 
 const mapStateToProps = state => ({

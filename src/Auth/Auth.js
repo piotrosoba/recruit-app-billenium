@@ -1,4 +1,5 @@
 import React from 'react'
+import PropTypes from 'prop-types'
 
 import { connect } from 'react-redux'
 
@@ -27,13 +28,16 @@ const Auth = props => {
   )
 }
 
+Auth.propTypes = {
+  _isLogged: PropTypes.bool,
+  children: PropTypes.element
+}
+
 const mapStateToProps = state => ({
   _isLogged: state.auth.isLogged
 })
 
-const mapDispatchToProps = dispatch => ({})
-
 export default connect(
   mapStateToProps,
-  mapDispatchToProps
+  null
 )(Auth)

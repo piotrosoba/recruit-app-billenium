@@ -1,4 +1,5 @@
 import React, { useState } from 'react'
+import PropTypes from 'prop-types'
 
 import { connect } from 'react-redux'
 import { registerUserAsyncActionCreator } from '../state/auth'
@@ -168,6 +169,12 @@ const RegisterForm = props => {
       </Paper>
     </div>
   )
+}
+
+RegisterForm.propTypes = {
+  _register: PropTypes.func,
+  _snackbar: PropTypes.func,
+  toggleForm: PropTypes.func
 }
 
 const mapStateToProps = state => ({})

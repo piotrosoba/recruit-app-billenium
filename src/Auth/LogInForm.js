@@ -1,4 +1,5 @@
 import React, { useState } from 'react'
+import PropTypes from 'prop-types'
 
 import { connect } from 'react-redux'
 import { logInAsyncActionCreator, resetPasswordAsyncActionCreator } from '../state/auth'
@@ -195,6 +196,13 @@ const LogInForm = props => {
       </Paper>
     </div>
   )
+}
+
+LogInForm.propTypes = {
+  _snackbar: PropTypes.func,
+  _logIn: PropTypes.func,
+  _resetPwd: PropTypes.func,
+  toggleForm: PropTypes.func
 }
 
 const mapDispatchToProps = dispatch => ({

@@ -1,4 +1,6 @@
 import React from 'react'
+import PropTypes from 'prop-types'
+
 import { connect } from 'react-redux'
 
 import { CircularProgress } from '@material-ui/core';
@@ -28,6 +30,10 @@ const FullScreenCircural = props => {
       :
       null
   )
+}
+
+FullScreenCircural.propTypes = {
+  _isOpen: PropTypes.number
 }
 
 const mapStateToProps = state => ({
