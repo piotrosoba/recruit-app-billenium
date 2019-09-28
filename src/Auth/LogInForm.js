@@ -104,7 +104,7 @@ const LogInForm = props => {
           align='center'
           variant='h4'
         >
-          Zaloguj się!
+          Zaloguj się
         </Typography>
         <TextField
           value={email}

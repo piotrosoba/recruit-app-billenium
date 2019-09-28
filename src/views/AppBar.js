@@ -13,7 +13,8 @@ import SettingsIcon from '@material-ui/icons/Settings'
 const styles = {
   title: { flexGrow: 1, marginLeft: 20 },
   link: { textDecoration: 'none', color: '#fff' },
-  menuLink: { textDecoration: 'none', color: '#000' }
+  menuLink: { textDecoration: 'none', color: '#000' },
+  div: { marginBottom: 10 }
 }
 
 
@@ -28,7 +29,7 @@ const AppBar = props => {
   }
 
   return (
-    <div>
+    <div style={styles.div}>
       <MuiAppBar position='static'>
         <Toolbar>
           <IconButton

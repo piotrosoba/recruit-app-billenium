@@ -81,7 +81,7 @@ const RegisterForm = props => {
           align='center'
           variant='h4'
         >
-          Zarejestruj się!
+          Zarejestruj się
         </Typography>
         <TextField
           value={email}

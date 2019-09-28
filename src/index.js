@@ -10,8 +10,6 @@ import theme from './theme'
 
 import App from './App'
 
-// import './main.css'
-
 store.dispatch(checkIsUserLoggedIn())
 
 ReactDOM.render(
