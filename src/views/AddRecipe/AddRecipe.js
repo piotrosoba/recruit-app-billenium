@@ -10,7 +10,8 @@ import Ingredients from './Ingredients'
 const styles = {
   container: { display: 'flex', flexDirection: 'column', alignItems: 'center' },
   input: { margin: '10px 0', maxWidth: 380 },
-  randomPhoto: { marginTop: -10, marginBottom: 10, cursor: 'pointer', color: 'blue' }
+  randomPhoto: { marginTop: -10, marginBottom: 10, cursor: 'pointer', color: 'blue' },
+  title: { margin: 30, fontWeight: 'bold' }
 }
 
 const AddRecipe = props => {
@@ -93,7 +94,7 @@ const AddRecipe = props => {
           setPhoto('')
           props._snackbar('Przepis został dodany do Twojej listy')
         })
-        .catch(() => props._snackbar('Nie udało się dodać przepisu. Spróbuj ponownie za chwilę.', 'red'))
+        .catch(() => props._snackbar('Nie udało się dodać przepisu. Spróbuj ponownie za chwilę', 'red'))
     }
   }
 
@@ -156,8 +157,10 @@ const AddRecipe = props => {
       style={styles.container}
     >
       <Typography
-        variant='h4'
+        variant='h5'
         align='center'
+        style={styles.title}
+        color='secondary'
       >
         Dodaj swój przepis
       </Typography>

@@ -16,16 +16,19 @@ const styles = {
     justifyContent: 'center',
     alignItems: 'center',
     zIndex: 1000000,
-    backgroundColor: 'grey',
-    opacity: 0.8
-  }
+    backgroundColor: 'rgba(36, 41, 41, 0.8)'
+  },
+  circular: { color: '#ffff33' }
 }
 
 const FullScreenCircural = props => {
   return (
     props._isOpen ?
       <div style={styles.div}>
-        <CircularProgress size={80} />
+        <CircularProgress
+          size={80}
+          style={styles.circular}
+        />
       </div>
       :
       null

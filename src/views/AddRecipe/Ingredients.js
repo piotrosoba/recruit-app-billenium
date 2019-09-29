@@ -55,7 +55,7 @@ const Ingredients = props => {
     const isQuantityError = quantityValidate()
 
     if (!isIngredientError && !isQuantityError) {
-      props.setIngredients([...props.ingredients, { ingredient, quantity }])
+      props.setIngredients([...props.ingredients, { ingredient: ingredient.toLowerCase(), quantity }])
       focusTo.current.focus()
       setIngredient('')
       setQuantity('')

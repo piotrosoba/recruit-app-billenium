@@ -8,6 +8,7 @@ import AppBar from './views/AppBar'
 import Drawer from './views/Drawer'
 import ScrollToTop from './components/ScrollToTop'
 import AddRecipe from './views/AddRecipe'
+import UserRecipes from './views/UserRecipes'
 
 const App = props => {
   return (
@@ -17,6 +18,7 @@ const App = props => {
           <AppBar />
           <Drawer />
           <Route path='/add' component={AddRecipe} />
+          <Route path='/your-recipes/:id?' component={UserRecipes} />
         </Router>
       </Auth>
       <ScrollToTop />

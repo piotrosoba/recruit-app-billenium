@@ -92,7 +92,7 @@ export const logInAsyncActionCreator = (email, password) => (dispatch) => {
         const idToken = response.data.idToken
         const refreshToken = response.data.refreshToken
         dispatch(saveAndDecodeTokenActionCreator(idToken, refreshToken))
-        dispatch(getUserFromBaseAsyncActionCreator())
+        return dispatch(getUserFromBaseAsyncActionCreator())
           .then(() => dispatch(logInActionCreator()))
       }
       return response
