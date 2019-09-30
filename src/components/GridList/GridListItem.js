@@ -20,7 +20,12 @@ const GridListItem = props => {
   return (
     <div
       style={styles.root}
-      onClick={() => props.history.push(props.route + '/' + props.data.key)}
+      onClick={() => {
+        props.history.push(props.route + '/' + props.data.key)
+        window.scrollTo({
+          top: 0
+        })
+      }}
     >
       <img
         style={styles.img}
