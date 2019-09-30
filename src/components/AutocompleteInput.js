@@ -76,14 +76,13 @@ function renderSuggestion(suggestionProps) {
 
 function getSuggestions(value, suggestions, { showEmpty = false } = {}) {
   const inputValue = value.trim().toLowerCase()
-  const inputLength = inputValue.length
   let count = 0
 
-  return inputLength === 0 && !showEmpty
+  return inputValue.length === 0 && !showEmpty
     ? []
     : suggestions.filter(suggestion => {
       const keep =
-        count < 5 && suggestion.label.slice(0, inputLength).toLowerCase() === inputValue
+        count < 7 && suggestion.label.includes(inputValue)
 
       if (keep) {
         count += 1

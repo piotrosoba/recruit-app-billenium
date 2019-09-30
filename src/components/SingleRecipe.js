@@ -9,20 +9,23 @@ import EditRecipe from './EditRecipe'
 
 const styles = {
   backToRecipes: { cursor: 'pointer', textDecoration: 'underline' },
-  paper: { padding: 20, maxWidth: 600, display: 'flex', flexWrap: 'wrap', margin: '20px auto' },
-  divImg: { width: 264, height: 264, position: 'relative', margin: '0 auto' },
-  img: { width: '100%', height: '100%', backgroundImage: 'url(' + imgPlacecholder + ')', backgroundSize: 'cover', backgroundPosition: 'center' },
-  recipe: { display: 'flex', flexDirection: 'column', flexGrow: 1, margin: '20px 20px 0 20px', maxWidth: 296 },
+  paper: { padding: 20, maxWidth: 600, margin: '20px auto' },
+  divImg: { width: 264, maxHeight: 264, position: 'relative', margin: '0 auto' },
+  img: { width: '100%', maxHeight: 264, backgroundImage: 'url(' + imgPlacecholder + ')', backgroundSize: 'cover', backgroundPosition: 'center' },
+  recipeImgDiv: { display: 'flex', flexWrap: 'wrap-reverse', alignItems: 'flex-end' },
+  recipe: { display: 'flex', flexDirection: 'column', alignItems: 'center', flexGrow: 1, margin: '20px 20px 0 20px' },
+  recipeName: { maxWidth: 264 },
   list: { marginTop: -5 },
   descriptionDiv: { width: '100%', marginTop: 25 },
-  description: { wordBreak: 'break-word' },
+  description: { wordBreak: 'break-word', whiteSpace: 'pre-line', marginTop: 20 },
   typographyTime: { fontSize: 12 },
   typohraphyIngredients: { marginTop: 5 },
   buttonsDiv: { width: '100%', marginTop: 25, display: 'flex', justifyContent: 'flex-end' },
   button: { margin: 10 },
   dotIcon: { width: 7 },
   listItem: { padding: '0 16px' },
-  listItemIcon: { marginRight: -40 }
+  listItemIcon: { marginRight: -40 },
+  listItemText: { marginBottom: 0, marginTop: 0, }
 }
 
 const SingleRecipe = props => {
@@ -59,58 +62,69 @@ const SingleRecipe = props => {
       style={styles.paper}
     >
       <div
-        style={styles.divImg}
+        style={styles.recipeImgDiv}
       >
-        <img
-          style={styles.img}
-          src={props.recipe.photo}
-          alt={props.recipe.name}
-          onError={evt => evt.target.src = imgPlacecholder}
-        />
-      </div>
-      <div
-        style={styles.recipe}
-      >
-        <Typography
-          variant='h5'
-          align='center'
-          gutterBottom
-          color='secondary'
+        <div
+          style={styles.recipe}
         >
-          <b>{props.recipe.name.toUpperCase()}</b>
+          <Typography
+            style={styles.recipeName}
+            variant='h5'
+            align='center'
+            gutterBottom
+            color='secondary'
+          >
+            <b>{props.recipe.name.toUpperCase()}</b>
+          </Typography>
+          <Typography
+            style={styles.typographyTime}
+            align='center'
+            gutterBottom
+            paragraph
+          >
+            Czas przygotowania: {props.recipe.time}min
         </Typography>
-        <Typography
-          style={styles.typographyTime}
-          align='center'
-          gutterBottom
-          paragraph
+          <Typography
+            style={styles.typohraphyIngredients}
+            align='center'
+            color='secondary'
+            gutterBottom
+          >
+            <b>Składniki:</b>
+          </Typography>
+
+          <List style={styles.list}>
+            {props.recipe.ingredients.map(el => (
+              <ListItem
+                style={styles.listItem}
+                key={el.ingredient + el.quantity}
+              >
+                <ListItemIcon style={styles.listItemIcon}>
+                  <DotIcon style={styles.dotIcon} />
+                </ListItemIcon>
+                <ListItemText
+                  style={styles.listItemText}
+                  primary={el.ingredient + ' - ' + el.quantity}
+                  primaryTypographyProps={{
+                    style: { fontSize: 14 }
+                  }}
+                />
+              </ListItem>
+
+            ))}
+          </List>
+
+        </div>
+        <div
+          style={styles.divImg}
         >
-          Czas przygotowania: {props.recipe.time}min
-        </Typography>
-        <Typography
-          style={styles.typohraphyIngredients}
-          align='center'
-          color='secondary'
-          gutterBottom
-        >
-          <b>Składniki:</b>
-        </Typography>
-
-        <List style={styles.list}>
-          {props.recipe.ingredients.map(el => (
-            <ListItem
-              style={styles.listItem}
-              key={el.ingredient + el.quantity}
-            >
-              <ListItemIcon style={styles.listItemIcon}>
-                <DotIcon style={styles.dotIcon} />
-              </ListItemIcon>
-              <ListItemText primary={el.ingredient + ' - ' + el.quantity} />
-            </ListItem>
-
-          ))}
-        </List>
-
+          <img
+            style={styles.img}
+            src={props.recipe.photo}
+            alt={props.recipe.name}
+            onError={evt => evt.target.src = imgPlacecholder}
+          />
+        </div>
       </div>
       <div
         style={styles.descriptionDiv}
@@ -125,6 +139,7 @@ const SingleRecipe = props => {
         </Typography>
         <Typography
           style={styles.description}
+          align='center'
         >
           {props.recipe.description}
         </Typography>

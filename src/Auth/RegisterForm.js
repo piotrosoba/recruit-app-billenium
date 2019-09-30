@@ -172,8 +172,6 @@ const RegisterForm = props => {
 }
 
 RegisterForm.propTypes = {
-  _register: PropTypes.func,
-  _snackbar: PropTypes.func,
   toggleForm: PropTypes.func
 }
 

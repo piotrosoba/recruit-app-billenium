@@ -5,8 +5,7 @@ const SAVE_USER = 'user/SAVE_USER'
 
 export const saveItemAsyncActionCreator = data => (dispatch, getState) => {
   const userId = getState().auth.user_id
-  // return dispatch(fetchWithTokenAndProgress(URL + 'users/' + userId + '/recipes.json', 'post', data))
-  return dispatch(fetchWithTokenAndProgress(URL + 'recipes.json', 'post', data))
+  return dispatch(fetchWithTokenAndProgress(URL + 'users/' + userId + '/recipes.json', 'post', data))
 }
 
 export const removeItemAsyncActionCreator = (key) => (dispatch, getState) => {

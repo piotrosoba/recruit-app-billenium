@@ -1,21 +1,24 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import { Link } from 'react-router-dom'
+import { withRouter, Link } from 'react-router-dom'
 
 import { connect } from 'react-redux'
 import { drawerOpenActionCreator } from '../state/drawer'
 import { logOutActionCreator } from '../state/auth'
 
-import { AppBar as MuiAppBar, Toolbar, Typography, IconButton, Popper, Grow, ClickAwayListener, Paper, MenuList, MenuItem } from '@material-ui/core'
+import { AppBar as MuiAppBar, Toolbar, IconButton, Popper, Grow, ClickAwayListener, Paper, MenuList, MenuItem } from '@material-ui/core'
 import MenuIcon from '@material-ui/icons/Menu'
 import SettingsIcon from '@material-ui/icons/Settings'
+import Logo from '../img/logo.png'
 
 const styles = {
   link: { textDecoration: 'none', color: '#fff' },
   menuLink: { textDecoration: 'none', color: '#000' },
   div: { marginBottom: 10 },
   toolbar: { justifyContent: 'space-between' },
-  poper: { zIndex: 10000 }
+  poper: { zIndex: 10000 },
+  logo: { cursor: 'pointer', display: 'flex', alignItems: 'center' },
+  logoIcon: {}
 }
 
 
@@ -43,16 +46,12 @@ const AppBar = props => {
           >
             <MenuIcon />
           </IconButton>
-          <Typography
-            variant="h6"
+          <div
+            style={styles.logo}
+            onClick={() => props.history.push('/')}
           >
-            <Link
-              to='/'
-              style={styles.link}
-            >
-              Kuchapka
-            </Link>
-          </Typography>
+            <img src={Logo} alt='logo' style={styles.logoIcon} />
+          </div>
           <IconButton
             color='inherit'
             ref={anchorRef}
@@ -123,4 +122,4 @@ const mapDispatchToProps = dispatch => ({
 export default connect(
   null,
   mapDispatchToProps
-)(AppBar)
+)(withRouter(AppBar))

@@ -145,14 +145,14 @@ class UserRecipes extends React.Component {
             />
             :
             <Typography
-              variant='h4'
+              variant='h5'
               align='center'
               color='secondary'
             >
               Nie znaleziono przepisu z tymi składnikami.
               <br />
-              Spróbuj z innymi.
-          </Typography>
+              Wprowadź inne produkty.
+            </Typography>
           }
         </div>
       )

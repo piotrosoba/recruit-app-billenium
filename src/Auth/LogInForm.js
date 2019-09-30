@@ -199,9 +199,6 @@ const LogInForm = props => {
 }
 
 LogInForm.propTypes = {
-  _snackbar: PropTypes.func,
-  _logIn: PropTypes.func,
-  _resetPwd: PropTypes.func,
   toggleForm: PropTypes.func
 }
 

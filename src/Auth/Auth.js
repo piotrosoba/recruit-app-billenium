@@ -29,7 +29,6 @@ const Auth = props => {
 }
 
 Auth.propTypes = {
-  _isLogged: PropTypes.bool,
   children: PropTypes.element
 }
 

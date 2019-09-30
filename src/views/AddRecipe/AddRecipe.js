@@ -27,7 +27,7 @@ const AddRecipe = props => {
     return isError
   }
   const setValidateName = string => {
-    if (string.length < 30)
+    if (string.length < 45)
       setName(string)
   }
 

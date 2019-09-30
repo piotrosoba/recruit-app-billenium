@@ -7,7 +7,7 @@ const styles = {
     display: 'flex',
     flexWrap: 'wrap',
     justifyContent: 'center',
-    maxWidth: 700,
+    maxWidth: 800,
     margin: 'auto'
   },
 }
@@ -28,7 +28,9 @@ const GridList = props => {
 }
 
 GridList.propTypes = {
-  data: PropTypes.array
+  data: PropTypes.array,
+  history: PropTypes.object,
+  route: PropTypes.string
 }
 
 export default GridList

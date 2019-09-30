@@ -7,7 +7,7 @@ import RemoveIcon from '@material-ui/icons/Delete'
 
 
 const styles = {
-  input: { margin: '10px 20px 10px 0', maxWidth: 170 },
+  input: { margin: '10px 20px 10px 0', maxWidth: 150 },
   inputsDiv: { display: 'flex', justifyContent: 'center' },
   addButton: { marginTop: 18, flexGrow: 1 },
   container: { maxWidth: 380, position: 'relative' },
