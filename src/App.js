@@ -11,6 +11,7 @@ import AddRecipe from './views/AddRecipe'
 import UserRecipes from './views/UserRecipes'
 import Recipes from './views/Recipes'
 import ChangePassword from './views/ChangePassword'
+import Dashbord from './views/Dashbord'
 
 const App = props => {
   return (
@@ -19,6 +20,7 @@ const App = props => {
         <Router>
           <AppBar />
           <Drawer />
+          <Route path='/' exact component={Dashbord} />
           <Route path='/change-password' component={ChangePassword} />
           <Route path='/add' component={AddRecipe} />
           <Route path='/your-recipes/:id?' component={UserRecipes} />

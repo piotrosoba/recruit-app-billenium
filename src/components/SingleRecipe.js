@@ -1,11 +1,12 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 
+import EditRecipe from './EditRecipe'
+
 import { Typography, Paper, Button, List, ListItem, ListItemText, ListItemIcon } from '@material-ui/core'
 import DotIcon from '@material-ui/icons/Brightness1'
 
 import imgPlacecholder from '../img/img-placeholder.svg'
-import EditRecipe from './EditRecipe'
 
 const styles = {
   backToRecipes: { cursor: 'pointer', textDecoration: 'underline' },
@@ -14,7 +15,7 @@ const styles = {
   img: { width: '100%', maxHeight: 264, backgroundImage: 'url(' + imgPlacecholder + ')', backgroundSize: 'cover', backgroundPosition: 'center' },
   recipeImgDiv: { display: 'flex', flexWrap: 'wrap-reverse', alignItems: 'flex-end' },
   recipe: { display: 'flex', flexDirection: 'column', alignItems: 'center', flexGrow: 1, margin: '20px 20px 0 20px' },
-  recipeName: { maxWidth: 264 },
+  recipeName: { maxWidth: 264, wordBreak: 'break-word' },
   list: { marginTop: -5 },
   descriptionDiv: { width: '100%', marginTop: 25 },
   description: { wordBreak: 'break-word', whiteSpace: 'pre-line', marginTop: 20 },

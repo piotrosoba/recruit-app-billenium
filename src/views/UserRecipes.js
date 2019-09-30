@@ -13,10 +13,10 @@ import AutocompleteInput from '../components/AutocompleteInput'
 import SingleRecipe from '../components/SingleRecipe'
 
 const styles = {
-  noRecipes: { margin: 20 },
+  noRecipes: { margin: 60 },
   autoComplete: { maxWidth: 700, margin: '30px auto' },
   refresh: { color: 'blue', textDecoration: 'underline', cursor: 'pointer' },
-  link: { textDecoration: 'none', fontWeight: 'bold', color: 'grey' }
+  link: { textDecoration: 'none', fontWeight: 'bold', color: '#558b2f' }
 }
 
 class UserRecipes extends React.Component {

@@ -93,7 +93,7 @@ const AppBar = props => {
                           to='/'
                           style={styles.menuLink}
                         >
-                          Wyloguj
+                          Wyloguj się
                          </Link>
                       </MenuItem>
                     </MenuList>
