@@ -1,21 +1,23 @@
 import React from 'react'
+import PropTypes from 'prop-types'
 
 import { connect } from 'react-redux'
-import { saveItemAsyncActionCreator } from '../../state/user'
-import { addSnackbarActionCreator } from '../../state/snackbars'
+import { addSnackbarActionCreator } from '../state/snackbars'
+import { editItemAsyncActionCreator } from '../state/user'
 
-import { TextField, Typography, Button, InputAdornment } from '@material-ui/core'
-import Ingredients from './Ingredients'
+import { InputAdornment, Typography, TextField, Dialog, Button } from '@material-ui/core'
+import Ingredients from '../views/AddRecipe/Ingredients'
 
 const styles = {
-  container: { display: 'flex', flexDirection: 'column', alignItems: 'center' },
+  dialog: { padding: 20 },
   input: { margin: '10px 0', maxWidth: 380 },
-  randomPhoto: { marginTop: -10, marginBottom: 10, cursor: 'pointer', color: 'blue' },
-  title: { margin: 30, fontWeight: 'bold' }
+  randomPhoto: { margin: '-10px auto 10px auto', cursor: 'pointer', color: 'blue', display: 'block' },
+  buttonsDiv: { margin: '10px auto' },
+  button: { margin: '10px 10px 0 10px' }
 }
 
-const AddRecipe = props => {
-  const [name, setName] = React.useState('')
+const EditRecipe = props => {
+  const [name, setName] = React.useState(props.recipe.name || '')
   const [nameError, setNameError] = React.useState(false)
   const nameValidate = (value = name) => {
     value = value && value.replace(/\s{2,}/g, ' ')
@@ -30,7 +32,7 @@ const AddRecipe = props => {
       setName(string)
   }
 
-  const [ingredients, setIngredients] = React.useState([])
+  const [ingredients, setIngredients] = React.useState(props.recipe.ingredients || [])
   const [ingredientsError, setIngredientsError] = React.useState(false)
   const ingredientsValidate = (value = ingredients) => {
     const isError = value.length === 0
@@ -38,7 +40,7 @@ const AddRecipe = props => {
     return isError
   }
 
-  const [description, setDescription] = React.useState('')
+  const [description, setDescription] = React.useState(props.recipe.description || '')
   const [descriptionError, setDescriptionError] = React.useState(false)
   const descriptionValidate = (value = description) => {
     value = value && value.replace(/\s{2,}/g, ' ')
@@ -49,7 +51,7 @@ const AddRecipe = props => {
     return isError
   }
 
-  const [time, setTime] = React.useState('')
+  const [time, setTime] = React.useState(props.recipe.time || '')
   const [timeError, setTimeError] = React.useState(false)
   const timeValidate = (value = time) => {
     value = Number(Number(value).toFixed(2))
@@ -62,7 +64,7 @@ const AddRecipe = props => {
     setTime(num < 0 ? 0 : num > 240 ? 240 : num)
   }
 
-  const [photo, setPhoto] = React.useState('')
+  const [photo, setPhoto] = React.useState(props.recipe.photo || '')
   const [photoError, setPhotoError] = React.useState(false)
   const photoValidate = (value = photo) => {
     const isError = !value || !value.match(/https?:\/\/(www\.)?[-a-zA-Z0-9@:%._+~#=]{1,256}\.[a-zA-Z0-9()]{1,6}\b([-a-zA-Z0-9()@:%_+.~#?&//=]*)/)
@@ -85,16 +87,15 @@ const AddRecipe = props => {
         time,
         photo
       }
-      props._save(recipe)
+      props._edit(recipe, props.recipe.key)
         .then(() => {
-          setName('')
-          setIngredients([])
-          setDescription('')
-          setTime('')
-          setPhoto('')
-          props._snackbar('Przepis został dodany do Twojej listy')
+          props.getData()
+            .then(() => {
+              props.setOpen(false)
+              props._snackbar('Przepis został zaktualizowany')
+            })
         })
-        .catch(() => props._snackbar('Nie udało się dodać przepisu. Spróbuj ponownie za chwilę', 'red'))
+        .catch(() => props._snackbar('Nie udało się. Spróbuj ponownie za chwilę', 'red'))
     }
   }
 
@@ -153,18 +154,13 @@ const AddRecipe = props => {
   ]
 
   return (
-    <div
-      style={styles.container}
+    <Dialog
+      PaperProps={{
+        style: styles.dialog
+      }}
+      open={props.open}
+      onClose={() => props.setOpen(false)}
     >
-      <Typography
-        variant='h5'
-        align='center'
-        style={styles.title}
-        color='secondary'
-      >
-        Dodaj swój przepis
-      </Typography>
-
       {inputs.map(input => input.name === 'Składniki' ?
         <Ingredients
           key={input.name}
@@ -205,24 +201,43 @@ const AddRecipe = props => {
       >
         (losowe zdjęcie)
       </Typography>
-      <Button
-        variant='contained'
-        color='primary'
-        onClick={onSubmit}
+      <div
+        style={styles.buttonsDiv}
       >
-        Dodaj przepis
-      </Button>
-    </div>
+        <Button
+          style={styles.button}
+          color='primary'
+          variant='contained'
+          onClick={onSubmit}
+        >
+          Zatwierdź
+        </Button>
+        <Button
+          style={styles.button}
+          color='secondary'
+          variant='contained'
+          onClick={() => props.setOpen(false)}
+        >
+          Wróć
+        </Button>
+      </div>
+    </Dialog>
   )
 }
 
+EditRecipe.propTypes = {
+  open: PropTypes.bool,
+  setOpen: PropTypes.func,
+  recipe: PropTypes.object,
+  getData: PropTypes.func
+}
 
 const mapDispatchToProps = dispatch => ({
-  _save: recipe => dispatch(saveItemAsyncActionCreator(recipe)),
-  _snackbar: (text, color) => dispatch(addSnackbarActionCreator(text, color))
+  _snackbar: (text, color) => dispatch(addSnackbarActionCreator(text, color)),
+  _edit: (recipe, key) => dispatch(editItemAsyncActionCreator(recipe, key)),
 })
 
 export default connect(
   null,
   mapDispatchToProps
-)(AddRecipe)
+)(EditRecipe)

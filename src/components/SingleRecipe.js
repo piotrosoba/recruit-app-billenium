@@ -1,9 +1,11 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 
-import { Typography, Paper, Button } from '@material-ui/core'
+import { Typography, Paper, Button, List, ListItem, ListItemText, ListItemIcon } from '@material-ui/core'
+import DotIcon from '@material-ui/icons/Brightness1'
 
 import imgPlacecholder from '../img/img-placeholder.svg'
+import EditRecipe from './EditRecipe'
 
 const styles = {
   backToRecipes: { cursor: 'pointer', textDecoration: 'underline' },
@@ -11,16 +13,21 @@ const styles = {
   divImg: { width: 264, height: 264, position: 'relative', margin: '0 auto' },
   img: { width: '100%', height: '100%', backgroundImage: 'url(' + imgPlacecholder + ')', backgroundSize: 'cover', backgroundPosition: 'center' },
   recipe: { display: 'flex', flexDirection: 'column', flexGrow: 1, margin: '20px 20px 0 20px', maxWidth: 296 },
-  ul: { marginTop: -5 },
+  list: { marginTop: -5 },
   descriptionDiv: { width: '100%', marginTop: 25 },
   description: { wordBreak: 'break-word' },
   typographyTime: { fontSize: 12 },
   typohraphyIngredients: { marginTop: 5 },
   buttonsDiv: { width: '100%', marginTop: 25, display: 'flex', justifyContent: 'flex-end' },
-  button: { margin: 10 }
+  button: { margin: 10 },
+  dotIcon: { width: 7 },
+  listItem: { padding: '0 16px' },
+  listItemIcon: { marginRight: -40 }
 }
 
 const SingleRecipe = props => {
+  const [openDialog, setOpenDialog] = React.useState(false)
+
 
   if (!props.recipe) {
     return (
@@ -88,17 +95,22 @@ const SingleRecipe = props => {
         >
           <b>Składniki:</b>
         </Typography>
-        <Typography
-          variant='body2'
-        >
-          <ul style={styles.ul}>
-            {props.recipe.ingredients.map(el => (
-              <li>
-                {el.ingredient} - {el.quantity}
-              </li>
-            ))}
-          </ul>
-        </Typography>
+
+        <List style={styles.list}>
+          {props.recipe.ingredients.map(el => (
+            <ListItem
+              style={styles.listItem}
+              key={el.ingredient + el.quantity}
+            >
+              <ListItemIcon style={styles.listItemIcon}>
+                <DotIcon style={styles.dotIcon} />
+              </ListItemIcon>
+              <ListItemText primary={el.ingredient + ' - ' + el.quantity} />
+            </ListItem>
+
+          ))}
+        </List>
+
       </div>
       <div
         style={styles.descriptionDiv}
@@ -125,6 +137,7 @@ const SingleRecipe = props => {
             style={styles.button}
             variant='contained'
             color='primary'
+            onClick={() => setOpenDialog(true)}
           >
             edytuj
           </Button>
@@ -140,7 +153,12 @@ const SingleRecipe = props => {
         :
         null
       }
-
+      <EditRecipe
+        open={openDialog}
+        setOpen={setOpenDialog}
+        recipe={props.recipe}
+        getData={props.getData}
+      />
     </Paper>
   )
 }
@@ -151,7 +169,8 @@ SingleRecipe.propTypes = {
   back: PropTypes.func,
   withEditAndRemove: PropTypes.bool,
   editRecipe: PropTypes.func,
-  removeRecipe: PropTypes.func
+  removeRecipe: PropTypes.func,
+  getData: PropTypes.func
 }
 
 export default SingleRecipe

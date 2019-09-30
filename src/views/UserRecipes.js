@@ -107,6 +107,7 @@ class UserRecipes extends React.Component {
         back={() => this.props.history.push('/your-recipes')}
         withEditAndRemove={true}
         removeRecipe={this.removeRecipe}
+        getData={this.getData}
       />
     }
 
