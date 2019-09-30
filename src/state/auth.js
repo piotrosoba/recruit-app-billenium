@@ -144,6 +144,8 @@ export const changePasswordAsyncActionCreator = (oldPassword, newPassword) => (d
       let message = 'Błąd! spróbuj ponownie później.'
       if (r.response && r.response.data.error && r.response.data.error.message === 'INVALID_PASSWORD')
         message = 'Nieprawidłowe aktualne hasło.'
+      if (r.response && r.response.data.error && r.response.data.error.message === 'CREDENTIAL_TOO_OLD_LOGIN_AGAIN')
+        message = 'Musisz zalogować się ponownie aby zmienić hasło.'
       dispatch(addSnackbarActionCreator(message, 'red'))
       return r
     })
