@@ -10,6 +10,7 @@ import ScrollToTop from './components/ScrollToTop'
 import AddRecipe from './views/AddRecipe'
 import UserRecipes from './views/UserRecipes'
 import Recipes from './views/Recipes'
+import ChangePassword from './views/ChangePassword'
 
 const App = props => {
   return (
@@ -18,6 +19,7 @@ const App = props => {
         <Router>
           <AppBar />
           <Drawer />
+          <Route path='/change-password' component={ChangePassword} />
           <Route path='/add' component={AddRecipe} />
           <Route path='/your-recipes/:id?' component={UserRecipes} />
           <Route path='/recipes/:id?' component={Recipes} />

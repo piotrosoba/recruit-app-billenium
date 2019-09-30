@@ -14,7 +14,8 @@ const styles = {
   link: { textDecoration: 'none', color: '#fff' },
   menuLink: { textDecoration: 'none', color: '#000' },
   div: { marginBottom: 10 },
-  toolbar: { justifyContent: 'space-between' }
+  toolbar: { justifyContent: 'space-between' },
+  poper: { zIndex: 10000 }
 }
 
 
@@ -59,7 +60,12 @@ const AppBar = props => {
           >
             <SettingsIcon />
           </IconButton>
-          <Popper open={openMenu} anchorEl={anchorRef.current} transition disablePortal>
+          <Popper
+            style={styles.poper}
+            open={openMenu}
+            anchorEl={anchorRef.current}
+            transition disablePortal
+          >
             {({ TransitionProps, placement }) => (
               <Grow
                 {...TransitionProps}
