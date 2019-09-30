@@ -11,7 +11,8 @@ const styles = {
   container: { display: 'flex', flexDirection: 'column', alignItems: 'center' },
   input: { margin: '10px 0', maxWidth: 380 },
   randomPhoto: { marginTop: -10, marginBottom: 10, cursor: 'pointer', color: 'blue' },
-  title: { margin: 30, fontWeight: 'bold' }
+  title: { margin: 30, fontWeight: 'bold' },
+  link: { fontSize: '1.5rem', fontWeight: 'bold', cursor: 'pointer' }
 }
 
 const AddRecipe = props => {
@@ -162,7 +163,17 @@ const AddRecipe = props => {
         style={styles.title}
         color='secondary'
       >
-        Dodaj swój przepis
+        Dodaj swój przepis.
+        <br />
+        Przepis zostanie dodany do{' '}
+        <Typography
+          style={styles.link}
+          color='primary'
+          display='inline'
+          onClick={() => props.history.push('/your-recipes')}
+        >
+          Twojej listy.
+          </Typography>
       </Typography>
 
       {inputs.map(input => input.name === 'Składniki' ?

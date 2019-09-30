@@ -6,13 +6,15 @@ import snackbars from './state/snackbars'
 import auth from './state/auth'
 import drawer from './state/drawer'
 import user from './state/user'
+import recipes from './state/recipes'
 
 const reducer = combineReducers({
   fullScreenCircural,
   snackbars,
   auth,
   drawer,
-  user
+  user,
+  recipes
 })
 
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose

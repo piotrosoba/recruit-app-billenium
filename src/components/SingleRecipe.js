@@ -164,7 +164,7 @@ const SingleRecipe = props => {
 }
 
 SingleRecipe.propTypes = {
-  recipe: PropTypes.object.isRequired,
+  recipe: PropTypes.object,
   itemId: PropTypes.string,
   back: PropTypes.func,
   withEditAndRemove: PropTypes.bool,
