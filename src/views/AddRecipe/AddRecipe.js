@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 
 import { connect } from 'react-redux'
 import { saveItemAsyncActionCreator } from '../../state/user'
@@ -16,7 +16,15 @@ const styles = {
 }
 
 const AddRecipe = props => {
-  const [name, setName] = React.useState('')
+  let formInStorage
+  try {
+    formInStorage = JSON.parse(localStorage.getItem('form'))
+  } catch (e) { }
+  const form = formInStorage instanceof Object ? formInStorage : {}
+
+  useEffect(() => localStorage.setItem('form', JSON.stringify({ name, ingredients, description, time, photo })))
+
+  const [name, setName] = React.useState(form.name || '')
   const [nameError, setNameError] = React.useState(false)
   const nameValidate = (value = name) => {
     value = value && value.replace(/\s{2,}/g, ' ')
@@ -31,7 +39,7 @@ const AddRecipe = props => {
       setName(string)
   }
 
-  const [ingredients, setIngredients] = React.useState([])
+  const [ingredients, setIngredients] = React.useState(form.ingredients || [])
   const [ingredientsError, setIngredientsError] = React.useState(false)
   const ingredientsValidate = (value = ingredients) => {
     const isError = value.length === 0
@@ -39,7 +47,7 @@ const AddRecipe = props => {
     return isError
   }
 
-  const [description, setDescription] = React.useState('')
+  const [description, setDescription] = React.useState(form.description || '')
   const [descriptionError, setDescriptionError] = React.useState(false)
   const descriptionValidate = (value = description) => {
     value = value && value.replace(/\s{2,}/g, ' ')
@@ -50,7 +58,7 @@ const AddRecipe = props => {
     return isError
   }
 
-  const [time, setTime] = React.useState('')
+  const [time, setTime] = React.useState(form.time || '')
   const [timeError, setTimeError] = React.useState(false)
   const timeValidate = (value = time) => {
     value = Number(Number(value).toFixed(2))
@@ -63,7 +71,7 @@ const AddRecipe = props => {
     setTime(num < 0 ? 0 : num > 240 ? 240 : num)
   }
 
-  const [photo, setPhoto] = React.useState('')
+  const [photo, setPhoto] = React.useState(form.photo || '')
   const [photoError, setPhotoError] = React.useState(false)
   const photoValidate = (value = photo) => {
     const isError = !value || !value.match(/https?:\/\/(www\.)?[-a-zA-Z0-9@:%._+~#=]{1,256}\.[a-zA-Z0-9()]{1,6}\b([-a-zA-Z0-9()@:%_+.~#?&//=]*)/)
@@ -93,6 +101,7 @@ const AddRecipe = props => {
           setDescription('')
           setTime('')
           setPhoto('')
+          localStorage.removeItem('form')
           props._snackbar('Przepis został dodany do Twojej listy')
         })
         .catch(() => props._snackbar('Nie udało się dodać przepisu. Spróbuj ponownie za chwilę', 'red'))
@@ -168,6 +177,11 @@ const AddRecipe = props => {
         Przepis zostanie dodany do{' '}
         <Typography
           style={styles.link}
+
+
+
+
+
           color='primary'
           display='inline'
           onClick={() => props.history.push('/your-recipes')}
