@@ -8,6 +8,11 @@ import { editItemAsyncActionCreator } from '../state/user'
 import { InputAdornment, Typography, TextField, Dialog, Button } from '@material-ui/core'
 import Ingredients from '../views/AddRecipe/Ingredients'
 
+const MAX_NAME_LENGTH = 45
+const MIN_NAME_LENGTH = 4
+const MIN_DESCRIPTION_LENGTH = 15
+const MAX_TIME = 240
+
 const styles = {
   dialog: { padding: 20 },
   input: { margin: '10px 0', maxWidth: 380 },
@@ -23,12 +28,12 @@ const EditRecipe = props => {
     value = value && value.replace(/\s{2,}/g, ' ')
     if (value)
       setName(value)
-    const isError = !value || value.length < 4
+    const isError = !value || value.length < MIN_NAME_LENGTH
     setNameError(isError)
     return isError
   }
   const setValidateName = string => {
-    if (string.length < 45)
+    if (string.length < MAX_NAME_LENGTH)
       setName(string)
   }
 
@@ -46,7 +51,7 @@ const EditRecipe = props => {
     value = value && value.replace(/\s{2,}/g, ' ')
     if (value)
       setDescription(value)
-    const isError = !value || value.length < 15
+    const isError = !value || value.length < MIN_DESCRIPTION_LENGTH
     setDescriptionError(isError)
     return isError
   }
@@ -61,7 +66,7 @@ const EditRecipe = props => {
     return isError
   }
   const setValidTime = num => {
-    setTime(num < 0 ? 0 : num > 240 ? 240 : num)
+    setTime(num < 0 ? 0 : num > MAX_TIME ? MAX_TIME : num)
   }
 
   const [photo, setPhoto] = React.useState(props.recipe.photo || '')

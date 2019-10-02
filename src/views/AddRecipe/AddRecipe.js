@@ -7,6 +7,11 @@ import { addSnackbarActionCreator } from '../../state/snackbars'
 import { TextField, Typography, Button, InputAdornment } from '@material-ui/core'
 import Ingredients from './Ingredients'
 
+const MAX_NAME_LENGTH = 45
+const MIN_NAME_LENGTH = 4
+const MIN_DESCRIPTION_LENGTH = 15
+const MAX_TIME = 240
+
 const styles = {
   container: { display: 'flex', flexDirection: 'column', alignItems: 'center' },
   input: { margin: '10px 0', maxWidth: 380 },
@@ -30,12 +35,12 @@ const AddRecipe = props => {
     value = value && value.replace(/\s{2,}/g, ' ')
     if (value)
       setName(value)
-    const isError = !value || value.length < 4
+    const isError = !value || value.length < MIN_NAME_LENGTH
     setNameError(isError)
     return isError
   }
   const setValidateName = string => {
-    if (string.length < 45)
+    if (string.length < MAX_NAME_LENGTH)
       setName(string)
   }
 
@@ -53,7 +58,7 @@ const AddRecipe = props => {
     value = value && value.replace(/\s{2,}/g, ' ')
     if (value)
       setDescription(value)
-    const isError = !value || value.length < 15
+    const isError = !value || value.length < MIN_DESCRIPTION_LENGTH
     setDescriptionError(isError)
     return isError
   }
@@ -68,7 +73,7 @@ const AddRecipe = props => {
     return isError
   }
   const setValidTime = num => {
-    setTime(num < 0 ? 0 : num > 240 ? 240 : num)
+    setTime(num < 0 ? 0 : num > MAX_TIME ? MAX_TIME : num)
   }
 
   const [photo, setPhoto] = React.useState(form.photo || '')
@@ -177,11 +182,6 @@ const AddRecipe = props => {
         Przepis zostanie dodany do{' '}
         <Typography
           style={styles.link}
-
-
-
-
-
           color='primary'
           display='inline'
           onClick={() => props.history.push('/your-recipes')}
